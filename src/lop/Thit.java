@@ -17,8 +17,8 @@ import java.util.Scanner;
 
 public class Thit extends NguyenLieu {
 	
-	public String moTa;
-	private String File_Thit = "./src/file/Thit";
+	private String moTa;
+	private static String File_Thit = "./src/file/Thit";
 	public static Thit[] dsThit = new Thit[0];
 	public static DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 	public Thit() {

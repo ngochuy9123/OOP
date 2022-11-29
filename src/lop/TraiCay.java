@@ -20,7 +20,7 @@ public class TraiCay extends NguyenLieu {
 	private String noiNhap;
 	public static TraiCay[] dsTraiCay = new TraiCay[0];
 	public static DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-	private String File_Trai_Cay = "./src/file/TraiCay";
+	private static String File_Trai_Cay = "./src/file/TraiCay";
 	
 	
 	public TraiCay() {

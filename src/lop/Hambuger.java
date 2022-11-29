@@ -78,8 +78,15 @@ public class Hambuger extends Food {
 		String tenSp = new Scanner(System.in).nextLine();
 		System.out.println("Moi ban nhap gia San Pham");
 		double gia = new Scanner(System.in).nextDouble();
+		int idNl =0;
 		System.out.println("Moi ban nhap id Nguyen Lieu");
-		int idNl = new Scanner(System.in).nextInt();
+		try {
+			idNl = new Scanner(System.in).nextInt();
+		} catch (Exception e) {
+			System.out.println("Ban can nhap kieu so");
+			
+		}
+		
 		
 		dsHambuger = Arrays.copyOf(dsHambuger, dsHambuger.length+1);
 		dsHambuger[dsHambuger.length-1] = new Hambuger(id, tenSp, gia, idNl);

@@ -488,15 +488,40 @@ public class Menu {
 	public static void quanLy() {
 		System.out.println("Quan Ly");
 		System.out.println("Ban muon thay doi: ");
+		System.out.println("0. Thoat");
 		System.out.println("1. Thuc An");
 		System.out.println("2. Nguyen Lieu");
 		int lc = new Scanner(System.in).nextInt();
 		if(lc==1) {
 			suaMonAn();
 		}
-		else {
+		else if(lc==0) {
+			System.out.println(
+	                " _______________________________________________ \n" +
+	                "|                                               |\n" +
+	                "|      THANKS FOR USING OUR APPLICATION         |\n" +
+	                "|                                               |\n" +
+	                "                                                 \n" +
+	                "            • ˚ •˛•˚ * 。 • ˚ ˚ ˛ ˚ ˛ •          \n" +
+	                "            • ˚Happy★* 。 • ˚ ˚ ˛ ˚ ˛ •          \n" +
+	                "            •。★Holidays!★ 。* • ˚。             \n" +
+	                "            ° 。 ° ˛˚˛ *__Π____*。*˚             \n" +
+	                "            ˚ ˛ •˛•˚ */______/~＼。˚ ˚ ˛         \n" +
+	                "            ˚˛ •˛• ˚ ｜ 田田 ｜門｜ ˚              \n" +
+	                "                                                 \n" +
+	                "                                                 \n" +
+	                "|                                               |\n" +
+	                "|     MERRY CHRISTMAS AND HAPPY NEW YEAR        |\n" +
+	                "|_______________________________________________|");
+			System.exit(0);
+			
+		}
+		else if(lc==2){
 			suaNguyenLieu();
 
+		}
+		else {
+			System.out.println("Ban da nhap sai yeu cau");
 		}
 	}
 	
@@ -511,7 +536,24 @@ public class Menu {
 			int lc = new Scanner(System.in).nextInt();
 			switch (lc) {
 			case 0: {
-				menu();
+				System.out.println(
+		                " _______________________________________________ \n" +
+		                "|                                               |\n" +
+		                "|      THANKS FOR USING OUR APPLICATION         |\n" +
+		                "|                                               |\n" +
+		                "                                                 \n" +
+		                "            • ˚ •˛•˚ * 。 • ˚ ˚ ˛ ˚ ˛ •          \n" +
+		                "            • ˚Happy★* 。 • ˚ ˚ ˛ ˚ ˛ •          \n" +
+		                "            •。★Holidays!★ 。* • ˚。             \n" +
+		                "            ° 。 ° ˛˚˛ *__Π____*。*˚             \n" +
+		                "            ˚ ˛ •˛•˚ */______/~＼。˚ ˚ ˛         \n" +
+		                "            ˚˛ •˛• ˚ ｜ 田田 ｜門｜ ˚              \n" +
+		                "                                                 \n" +
+		                "                                                 \n" +
+		                "|                                               |\n" +
+		                "|     MERRY CHRISTMAS AND HAPPY NEW YEAR        |\n" +
+		                "|_______________________________________________|");
+				System.exit(0);
 				break;
 			}
 			case 1:{
