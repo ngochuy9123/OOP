@@ -1,6 +1,6 @@
 package lop;
 
-interface InterDanhSach {
+public interface InterDanhSach {
 	public boolean ktTrung(int id);
 	public void xuatDs();
 	public void them();

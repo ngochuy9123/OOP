@@ -89,7 +89,7 @@ public class PersonList implements ManagerList {
 	    }
 	    public void ghiFileDSPerson(){
 	        try {
-	            BufferedWriter w = new BufferedWriter(new FileWriter("dsnhanvien.txt"));
+	            BufferedWriter w = new BufferedWriter(new FileWriter("./src/file/dsnhanvien.txt"));
 	            for (int i = 0; i < listPerson.length; i++) {
 	                w.write(listPerson[i].getId() + ", ");
 	                w.write(listPerson[i].getName() + ", ");
@@ -106,9 +106,11 @@ public class PersonList implements ManagerList {
 	                }
 	            }
 	            w.close();
+	            System.out.println("Ghi thanh cong");
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
+	        
 	    }
 	    @Override
 	    public void themDS(){
@@ -212,10 +214,10 @@ public class PersonList implements ManagerList {
 	            String DelID = sc.nextLine();
 	            Boolean flag = false;
 	            int notFind = 0;
-	            for (int i = 0; i < listPerson.length; i++) {
-	                if (listPerson[i].getId().equalsIgnoreCase(DelID)){
+	            for(int i = 0; i < listPerson.length; i++) {
+	                if(listPerson[i].getId().equalsIgnoreCase(DelID)){
 	                    flag = true;
-	                    for (int j = i; j < listPerson.length-1; j++) {
+	                    for(int j = i; j < listPerson.length-1; j++) {
 	                        listPerson[j] = listPerson[j+1];
 	                    }
 	                }

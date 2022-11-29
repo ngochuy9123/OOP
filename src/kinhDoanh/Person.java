@@ -11,7 +11,7 @@ public abstract class Person {
 	private String address;
 	private String id;
 	private String chucVu;
- private String gioiTinh;
+	private String gioiTinh;
 	
 	
 	public Person() {
@@ -82,10 +82,10 @@ public abstract class Person {
 			System.out.println("Nhap ho va ten: ");
 			this.name = sc.nextLine();
 			boolean check1 =true;
+			String idt = null;
 			while(check1 ==true) {
 				System.out.println("Nhap id: ");
-				this.id = sc.nextLine();
-				String idt = id;
+				idt = sc.nextLine();
 				boolean flag = true;
 				for(Person per:PersonList.listPerson) {
 					if(idt.equals(per.getId())) {
@@ -97,6 +97,7 @@ public abstract class Person {
 					break;
 				}
 			}
+			setId(idt);
 			
 			System.out.println("Nhap nam sinh:");
 	        int birthYear = Integer.parseInt(sc.nextLine());
