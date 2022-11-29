@@ -57,60 +57,73 @@ public class Test {
 //			System.out.println(t.getTenNguyenLieu());
 //		tc.them();
 		
-		Hambuger ham = new Hambuger();
-		ham.docFile();
-		String exit ="khong";
-		do {
-			System.out.println(
-	                "\nPlease choice:             \n"
-				  + "0. Thoat               \n"
-	              + "1. Them               \n"
-	              + "2. Xoa             \n"
-	              + "3. Sua                \n"
-	              + "4. tim kiem                \n"
-	              + "5. sap xep                     "
-				);
-			int i = new Scanner(System.in).nextInt();
-			switch (i) {
-			case 0:{
-				exit="co";
-			}
-			case 1: {
-				ham.them();
-				break;
-			}
-			case 2: {
-				ham.xoa();
-				break;
-			}
-			case 3: {
-				ham.sua();
-				break;
-			}
-			case 4: {
-				ham.timKiem();
-				break;
-			}
-			case 5: {
-				ham.sapXep();
-				break;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + i);
-			}
-		}while(exit!="co");
+//		Thit t = new Thit();
+//		t.docFile();
+//		Hambuger ham = new Hambuger();
+//		ham.docFile();
+//		FriedChicken ga = new FriedChicken();
+//		ga.docFile();
+//		String exit ="khong";
+//		do {
+//			System.out.println(
+//	                "\nPlease choice:             \n"
+//				  + "0. Thoat               \n"
+//	              + "1. Them               \n"
+//	              + "2. Xoa             \n"
+//	              + "3. Sua                \n"
+//	              + "4. tim kiem                \n"
+//	              + "5. sap xep                     "
+//				);
+//			int i = new Scanner(System.in).nextInt();
+//			switch (i) {
+//			case 0:{
+//				exit="co";
+//			}
+//			case 1: {
+//				ga.them();
+//				break;
+//			}
+//			case 2: {
+//				ga.xoa();
+//				break;
+//			}
+//			case 3: {
+//				ga.sua();
+//				break;
+//			}
+//			case 4: {
+//				ga.timKiem();
+//				break;
+//			}
+//			case 5: {
+//				ga.sapXep();
+//				break;
+//			}
+//			default:
+//				throw new IllegalArgumentException("Unexpected value: " + i);
+//			}
+//		}while(exit!="co");
 		
 
 			
-		for(Hambuger h:Hambuger.dsHambuger) {
-			System.out.println(h.getTenMonAn());
-		}
+//		for(Hambuger h:Hambuger.dsHambuger) {
+//			System.out.println(h.getTenMonAn());
+//		}
 		
 //		User u = new User();
 //		u.docFile();
 //		System.out.println(u.dangNhap());
 			
+//		System.out.printf("%-10s;%-5d","STT",4);
 		
-		
+		Thit t = new Thit();
+		t.docFile();
+		t.xuatDs();
+		TraiCay tc = new TraiCay();
+		tc.docFile();
+		tc.xuatDs();
+		NuocEp ne = new NuocEp();
+		ne.docFile();
+		ne.xuatDs();
 	}
 }

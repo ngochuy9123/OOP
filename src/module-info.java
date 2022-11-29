@@ -6,7 +6,7 @@
  *
  */
 module DoAn {
-    private void name() {
-        
-    }
+//    private void name() {
+//        
+//    }
 }

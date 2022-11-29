@@ -58,17 +58,19 @@ public class Thit extends NguyenLieu {
 	
 	@Override
 	public void them() {
+		int test = 1;
 		
-		dsThit = Arrays.copyOf(dsThit, dsThit.length+1);
-		
-		System.out.println("Moi ban nhap id");
-		int id = new Scanner(System.in).nextInt();
-		if(ktTrung(id)==true) {
-			System.out.println("Id nay da ton tai");
-			them();
+		int id = 0;
+		while(test==1) {
+			System.out.println("Moi ban nhap id San Pham");
+			id = new Scanner(System.in).nextInt();
+			if(ktTrung(id)==true) {
+				System.out.println("Id nay da ton tai");
+			}
+			else {
+				test = 0;
+			}
 		}
-			
-		
 		System.out.println("Moi ban nhap ten nguyen lieu");
 		String tenNL = new Scanner(System.in).nextLine();
 		System.out.println("Moi ban nhap gia Nguyen Lieu");
@@ -86,6 +88,7 @@ public class Thit extends NguyenLieu {
 		int sl = new Scanner(System.in).nextInt();
 		System.out.println("Moi ban nhap mo ta");
 		String moTa = new Scanner(System.in).nextLine();
+		dsThit = Arrays.copyOf(dsThit, dsThit.length+1);
 		dsThit[dsThit.length-1] = new Thit(id, tenNL, gia,ngayhh , sl, moTa);
 			
 		try {
@@ -102,25 +105,35 @@ public class Thit extends NguyenLieu {
 	public void xoa() {
 		System.out.println("Moi ban nhap id san pham ma ban muon xoa");
 		int id = new Scanner(System.in).nextInt();
-		Thit[] dst = new Thit[0];
-		for(Thit t:dsThit) {
-			if(t.getId() == id)
-				System.out.println("xoa"+t.getId());
-			else {
-				dst = Arrays.copyOf(dst, dst.length+1);
-				dst[dst.length-1] = new Thit(t.getId(), t.getTenNguyenLieu(), t.getGia(), t.getHanSuDung(), t.getSoLuong(), t.getMoTa());
+		if(ktTrung(id)==false)
+			System.out.println("Id khong ton tai");
+		else {
+			Thit[] dst = new Thit[0];
+			for(Thit t:dsThit) {
+				if(t.getId() == id)
+					System.out.println("xoa"+t.getId());
+				else {
+					dst = Arrays.copyOf(dst, dst.length+1);
+					dst[dst.length-1] = new Thit(t.getId(), t.getTenNguyenLieu(), t.getGia(), t.getHanSuDung(), t.getSoLuong(), t.getMoTa());
+					
+				}
 				
 			}
+			dsThit = Arrays.copyOf(dst, dst.length);
+			try {
+				ghiFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				System.out.println("Loi ghi file");
+				e.printStackTrace();
+			}
 			
+			System.out.println("Ban co muon xoa tiep khong ----- Nhan 'y' de xoa tiep");
+			String c = new Scanner(System.in).nextLine();
+			if(c.equals("y"))
+				xoa();
 		}
-		dsThit = Arrays.copyOf(dst, dst.length);
-		try {
-			ghiFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Loi ghi file");
-			e.printStackTrace();
-		}
+		
 	}
 
 	@Override
@@ -148,8 +161,50 @@ public class Thit extends NguyenLieu {
 					break;
 				}
 				
-//				Lam Tiep Buoc Nay
-				
+//				
+				case 2: {
+					System.out.println("Gia Ban Dau la:");
+					System.out.println(t.getGia());
+					System.out.println("Moi ban nhap Gia moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setGia(Double.parseDouble(temp));
+					System.out.println("Da Thay Doi Gia");
+					break;
+				}
+				case 3: {
+					System.out.println("Han Su Dung Ban Dau la:");
+					System.out.println(t.getHanSuDung());
+					System.out.println("Moi ban nhap Han Su Dung moi:");
+					temp = new Scanner(System.in).nextLine();
+					Date time = null;
+					try {
+						time = (Date)df.parse(temp);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					t.setHanSuDung(time);
+					System.out.println("Da Thay Doi Han Su Dung");
+					break;
+				}
+				case 4: {
+					System.out.println("So Luong Ban Dau la:");
+					System.out.println(t.getSoLuong());
+					System.out.println("Moi ban nhap So Luong moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setSoLuong(Integer.parseInt(temp));
+					System.out.println("Da Thay Doi So Luong");
+					break;
+				}
+				case 5: {
+					System.out.println("Mo Ta Ban Dau la:");
+					System.out.println(t.getMoTa());
+					System.out.println("Moi ban nhap Mo Ta moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setTenNguyenLieu(temp);
+					System.out.println("Da Thay Doi Mo Ta");
+					break;
+				}
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + i);
 				}
@@ -233,9 +288,12 @@ public class Thit extends NguyenLieu {
 	
 	@Override
 	public boolean ktTrung(int id) {
-		for(Thit t:dsThit)
+		
+		for(Thit t:dsThit) {
 			if(t.getId()==id)
 				return true;
+		}
+			
 		return false;
 	}
 	
@@ -285,14 +343,17 @@ public class Thit extends NguyenLieu {
 
 	@Override
 	public void xuatDs() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Danh Sach cua Nguyen Lieu Thit la: ");
+		System.out.printf("|%-2s | %-20s | %-6s | %-7s | %-2s | %-20s","ID", "Ten Nguyen Lieu","Gia","Han Su Dung","So Luong", "Mo Ta");
+		System.out.println();
+		for(Thit t:dsThit)
+			System.out.println(t.toString());
 	}
 	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString() + String.format("", dsThit);
+		return super.toString() + String.format("| %-20s", moTa);
 	}
 
 	@Override
@@ -347,5 +408,6 @@ public class Thit extends NguyenLieu {
 			}
 		}
 	}
+	
 	
 }

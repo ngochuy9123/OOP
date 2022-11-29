@@ -1,5 +1,6 @@
-1;Cam;20.0;03/11/2022;21;Hello;My
-2;Dao;20.0;03/12/2022;21;Hello;Phap
-3;Buoi;20.0;09/11/2022;21;Hello;Trung Quoc
-4;Quyt;20.0;03/01/2022;21;Hello;Viet Nam
-5;Xoai;20000.0;20/03/2023;30;Viet Nam;hello
+1;Cam;20.0;03/11/2022;21;My;Hello
+2;Dao;20.0;03/12/2022;21;Phap;Hello
+3;Buoi;20.0;09/11/2022;21;Trung Quoc;Hello
+4;Quyt;20.0;03/01/2022;21;Viet Nam;Hello
+5;Xoai;20000.0;20/03/2023;30;hello;Viet Nam
+0;Thit Bo;120000.0;22/03/2022;20;My;khong gi ca

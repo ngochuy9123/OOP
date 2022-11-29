@@ -57,8 +57,8 @@ public abstract class NguyenLieu implements InterDanhSach,InterFile  {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return String.format("|%-5s | %-20s | %-8s | %-6s | %-11s ",
-		        id, tenNguyenLieu,gia,hanSuDung,soLuong);
+		return String.format("|%-1s | %-20s | %-6s | %-7s | %-2s ",
+		        id, tenNguyenLieu,gia,df.format(hanSuDung),soLuong);
 	}
 	
 }

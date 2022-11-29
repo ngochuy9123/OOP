@@ -64,8 +64,11 @@ public class NuocCoGa extends Food {
 	}
 	@Override
 	public void xuatDs() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Danh Sach cua Mon An Thit la: ");
+		System.out.printf("|%-1s | %-20s | %-6s | %-10s | %-10s","ID", "Ten Mon An","Gia","Ten Hang Nuoc","Gia Nhap Hang");
+		System.out.println();
+		for(NuocCoGa nc:dsNuocCoGa)
+			System.out.println(nc.toString());
 	}
 	@Override
 	public void them() {
@@ -106,38 +109,178 @@ public class NuocCoGa extends Food {
 	}
 	@Override
 	public void xoa() {
-		// TODO Auto-generated method stub
+		System.out.println("Moi ban nhap id ma ban can xoa");
+		int id = new Scanner(System.in).nextInt();
+		NuocCoGa[] dst = new NuocCoGa[0];
+		for(NuocCoGa h:dsNuocCoGa) {
+			if(h.getId() != id) {
+				dst = Arrays.copyOf(dst, dst.length+1);
+				dst[dst.length-1] = new NuocCoGa(h.getId(), h.getTenMonAn(), h.getGia(), h.getTenHangNuoc(),h.getGiaNhapHang());
+			}
+			
+		}
+		dsNuocCoGa = Arrays.copyOf(dst, dst.length);
+		try {
+			ghiFile();
+		} catch (IOException e) {
+			System.out.println("Loi ghi file");
+			e.printStackTrace();
+		}
 		
+		System.out.println("Ban co muon xoa tiep khong ----- Nhan 'y' de xoa tiep");
+		String c = new Scanner(System.in).nextLine();
+		if(c.equals("y"))
+			xoa();
 	}
 	@Override
 	public void sua() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Moi ban nhap id Mon An ma ban muon sua");
+		int id = new Scanner(System.in).nextInt();
+		String temp = null;	
+		if(ktTrung(id)==false) {
+			System.out.println("Khong Ton tai id Thuc An nay;");
+		}
+		else {
+			for(NuocCoGa ham:dsNuocCoGa) {
+				if(ham.getId()==id) {
+					System.out.println("Ban muon sua cai gi");
+					System.out.println("1. Ten Mon An");
+					System.out.println("2. Gia");
+					System.out.println("3. Id Nguyen Lieu");
+					System.out.println("4. Id Nguyen Lieu");
+					int lc = new Scanner(System.in).nextInt();
+					switch (lc) {
+					case 1: {
+						System.out.println("Ten Mon An Ban Dau la:");
+						
+						System.out.println("Moi ban nhap Ten Mon An moi:");
+						temp = new Scanner(System.in).nextLine();
+						ham.setTenMonAn(temp);
+						System.out.println("Da Thay Doi Ten Nguyen Lieu");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+						}
+					case 2: {
+						System.out.println("Gia Ban Dau la:");
+						System.out.println(ham.getGia());
+						System.out.println("Moi ban nhap Gia moi:");
+						double tam = new Scanner(System.in).nextDouble();
+						ham.setGia(tam);
+						System.out.println("Da Thay Doi Thanh Cong");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					case 3:{
+						System.out.println("Ten Hang Nuoc Ban Dau la:");
+						System.out.println(ham.getTenHangNuoc());
+						System.out.println("Moi ban nhap Ten Hang Nuoc moi:");
+						String tam = new Scanner(System.in).nextLine();
+						ham.setTenHangNuoc(tam);
+						System.out.println("Da Thay Doi Thanh Cong");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					case 4:{
+						System.out.println("Gia Nhap Hang Ban Dau la:");
+						System.out.println(ham.getGiaNhapHang());
+						System.out.println("Moi ban nhap Ten Hang Nuoc moi:");
+						Double tam = new Scanner(System.in).nextDouble();
+						ham.setGiaNhapHang(tam);
+						System.out.println("Da Thay Doi Thanh Cong");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					
+					}
+				}
+			}
+		}
 	}
 	@Override
 	public void timKiem() {
-		// TODO Auto-generated method stub
-		
+		Arrays.sort(dsNuocCoGa, (a, b) -> a.getTenMonAn().compareTo(b.getTenMonAn()));
+		System.out.println("Moi ban nhap tu can tim");
+		String key = new Scanner(System.in).nextLine();
+		for(NuocCoGa h:dsNuocCoGa)
+			if(h.getTenMonAn().toLowerCase().contains(key))
+				System.out.println(h.getTenMonAn());
 	}
 	@Override
 	public void sapXep() {
-		// TODO Auto-generated method stub
+		System.out.println("Moi ban chon thu can sap xep ");
+		System.out.println("1. id Nguyen Lieu");
+		System.out.println("2. Ten Mon An");
+		System.out.println("3. Gia Mon An");
+		int n = new Scanner(System.in).nextInt();
 		
+		switch (n) {
+		case 1: {
+			sapXepTheoId();
+			break;
+		}
+		case 2: {
+			sapXepTheoTen();
+			break;
+		}
+		case 3: {
+			sapXepTheoGia();
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + n);
+		}
+		xuatDs();
 	}
 	@Override
 	public void sapXepTheoTen() {
-		// TODO Auto-generated method stub
+		Arrays.sort(dsNuocCoGa, (a, b) -> a.getTenMonAn().compareTo(b.getTenMonAn()));
 		
 	}
 	@Override
 	public void sapXepTheoGia() {
-		// TODO Auto-generated method stub
-		
+		NuocCoGa ham = new NuocCoGa();
+		for(int i=0;i<dsNuocCoGa.length;i++) {
+			for(int j=i+1;j<dsNuocCoGa.length;j++) {
+				if(dsNuocCoGa[i].getGia() > dsNuocCoGa[j].getGia()) {
+					ham = dsNuocCoGa[i];
+					dsNuocCoGa[i] = dsNuocCoGa[j];
+					dsNuocCoGa[j] = ham;
+				}
+			}
+		}
 	}
 	@Override
 	public void sapXepTheoId() {
-		// TODO Auto-generated method stub
-		
+		NuocCoGa ham = new NuocCoGa();
+		for(int i=0;i<dsNuocCoGa.length;i++) {
+			for(int j=i+1;j<dsNuocCoGa.length;j++) {
+				if(dsNuocCoGa[i].getId() > dsNuocCoGa[j].getId()) {
+					ham = dsNuocCoGa[i];
+					dsNuocCoGa[i] = dsNuocCoGa[j];
+					dsNuocCoGa[j] = ham;
+				}
+			}
+		}
 	}
 	@Override
 	public void docFile() throws IOException {
@@ -179,10 +322,16 @@ public class NuocCoGa extends Food {
 		System.out.println("Ghi thanh Cong");
 		
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+String.format("| %-10s| %-5s|", tenHangNuoc,giaNhapHang);
+	}
+	
 	@Override
 	public double setGiaBan() {
-		// TODO Auto-generated method stub
-		return 0;
+		return giaNhapHang+getGia();
 	}
 	
 	

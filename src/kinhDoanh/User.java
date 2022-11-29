@@ -61,7 +61,7 @@ public class User implements InterFile {
 	
 	public static int dangNhap() {
 		String exit = "khong";
-		
+		do {
 			System.out.print("Moi ban nhap username: ");
 			String username = new Scanner(System.in).nextLine();
 			System.out.println("Moi ban nhap password: ");
@@ -73,7 +73,7 @@ public class User implements InterFile {
 						exit = "co";
 						return 1;
 					}
-					case "daubep":{
+					case "ketoan":{
 						exit = "co";
 						return 2;
 					}
@@ -91,10 +91,14 @@ public class User implements InterFile {
 			String yn = new Scanner(System.in).nextLine();
 			if(yn.equals("y"))
 				System.out.println("Moi ban nhap tiep ");
-			else
+			else {
 				exit ="co";
-				return 0;
-		
+				
+			}
+				
+		}while(exit.equals("khong"));
+			
+		return 0;
 		
 	}
 	

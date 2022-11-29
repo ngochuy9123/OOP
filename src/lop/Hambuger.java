@@ -51,6 +51,9 @@ public class Hambuger extends Food {
 	}
 	@Override
 	public void xuatDs() {
+		System.out.println("Danh Sach cua Mon An Thit la: ");
+		System.out.printf("|%-5s | %-20s | %-8s  | %-2s ","ID", "Ten Mon An","Gia","ID Nguyen Lieu");
+		System.out.println();
 		for(Hambuger ham:dsHambuger)
 			System.out.println(ham.toString());
 		
@@ -125,14 +128,86 @@ public class Hambuger extends Food {
 	}
 	@Override
 	public void sua() {
-		System.out.println("Moi ban nhap id Nguyen Lieu ma ban muon sua");
+		System.out.println("Moi ban nhap id Mon An ma ban muon sua");
 		int id = new Scanner(System.in).nextInt();
 		String temp = null;	
-		for(Hambuger ham:dsHambuger) {
-			if(ham.getId()==id) {
-				System.out.println("Dang Cap Nhat");
+		if(ktTrung(id)==false) {
+			System.out.println("Khong Ton tai id Thuc An nay;");
+		}
+		else {
+			for(Hambuger ham:dsHambuger) {
+				if(ham.getId()==id) {
+					System.out.println("Ban muon sua cai gi");
+					System.out.println("1. Ten Mon An");
+					System.out.println("2. Gia");
+					System.out.println("3. Id Nguyen Lieu");
+					int lc = new Scanner(System.in).nextInt();
+					switch (lc) {
+					case 1: {
+						System.out.println("Ten Mon An Ban Dau la:");
+						
+						System.out.println("Moi ban nhap Ten Mon An moi:");
+						temp = new Scanner(System.in).nextLine();
+						ham.setTenMonAn(temp);
+						System.out.println("Da Thay Doi Ten Nguyen Lieu");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+						}
+					case 2: {
+						System.out.println("Gia Ban Dau la:");
+						System.out.println(ham.getGia());
+						System.out.println("Moi ban nhap Gia moi:");
+						double tam = new Scanner(System.in).nextDouble();
+						ham.setGia(tam);
+						System.out.println("Da Thay Doi Thanh Cong");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					case 3:{
+						System.out.println("Nguyen Lieu Ban Dau la: ");
+						int idt =0;
+						for(Thit t: Thit.dsThit) {
+							if(t.getId() == ham.getIdNguyenLieu()) {
+								System.out.println(t.getId()+" - "+t.getTenNguyenLieu());
+								System.out.println("Moi ban nhap id Nguyen Lieu Moi: ");
+								while(true) {
+									idt = new Scanner(System.in).nextInt();
+									if(t.ktTrung(idt)==true) {
+										System.out.println("Da Cap Nhat Thanh Cong");
+										break;
+									}
+									else {
+										System.out.println("Id nguyen lieu khong ton tai;");
+									}
+								}
+							}
+						}
+						ham.setIdNguyenLieu(idt);
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					
+					}
+				}
 			}
 		}
+		
+		
 	}
 	@Override
 	public void timKiem() {

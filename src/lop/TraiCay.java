@@ -56,12 +56,18 @@ public class TraiCay extends NguyenLieu {
 	@Override
 	public void them() {
 		// TODO Auto-generated method stub
-		
-		System.out.println("Moi ban nhap id");
-		int id = new Scanner(System.in).nextInt();
-		if(ktTrung(id)==true) {
-			System.out.println("Id nay da ton tai");
-			
+		int test =1;
+		int id =0;
+		while(test==1) {
+			System.out.println("Moi ban nhap id San Pham");
+			id = new Scanner(System.in).nextInt();
+			if(ktTrung(id)==true) {
+				System.out.println("Id nay da ton tai");
+				
+			}
+			else {
+				test = 0;
+			}
 		}
 		System.out.println("Moi ban nhap ten nguyen lieu");
 		String tenNL = new Scanner(System.in).nextLine();
@@ -88,18 +94,129 @@ public class TraiCay extends NguyenLieu {
 	}
 	@Override
 	public void xoa() {
-		// TODO Auto-generated method stub
+		System.out.println("Moi ban nhap id san pham ma ban muon xoa");
+		int id = new Scanner(System.in).nextInt();
+		if(ktTrung(id)==false)
+			System.out.println("Id khong ton tai");
+		else {
+			TraiCay[] dst = new TraiCay[0];
+			for(TraiCay t:dsTraiCay) {
+				if(t.getId() == id)
+					System.out.println("xoa"+t.getId());
+				else {
+					dst = Arrays.copyOf(dst, dst.length+1);
+					dst[dst.length-1] = new TraiCay(t.getId(), t.getTenNguyenLieu(), t.getGia(), t.getHanSuDung(), t.getSoLuong(), t.getGhiChu(),t.getNoiNhap());
+					
+				}
+				
+			}
+			dsTraiCay = Arrays.copyOf(dst, dst.length);
+			ghiFile();
+			
+			System.out.println("Ban co muon xoa tiep khong ----- Nhan 'y' de xoa tiep");
+			String c = new Scanner(System.in).nextLine();
+			if(c.equals("y"))
+				xoa();
+		}
 		
 	}
 	@Override
 	public void sua() {
-		// TODO Auto-generated method stub
+		System.out.println("Moi ban nhap id Nguyen Lieu ma ban muon sua");
+		int id = new Scanner(System.in).nextInt();
+		String temp = null;
+		if(ktTrung(id)==true) {
+			for(TraiCay t:dsTraiCay) {
+			if(t.getId()==id) {
+				System.out.println("Ban muon sua cai gi");
+				System.out.println("1. Ten Nguyen Lieu");
+				System.out.println("2. Gia");
+				System.out.println("3. Han Su Dung");
+				System.out.println("4. So Luong");
+				System.out.println("5. Ghi Chu");
+				System.out.println("6. Noi Nhap");
+				int i = new Scanner(System.in).nextInt();
+				switch (i) {
+				case 1: {
+					System.out.println("Ten Nguyen Lieu Ban Dau la:");
+					System.out.println(t.getTenNguyenLieu());
+					System.out.println("Moi ban nhap Ten Nguyen Lieu moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setTenNguyenLieu(temp);
+					System.out.println("Da Thay Doi Ten Nguyen Lieu");
+					break;
+				}
+				
+//				
+				case 2: {
+					System.out.println("Gia Ban Dau la:");
+					System.out.println(t.getGia());
+					System.out.println("Moi ban nhap Gia moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setGia(Double.parseDouble(temp));
+					System.out.println("Da Thay Doi Gia");
+					break;
+				}
+				case 3: {
+					System.out.println("Han Su Dung Ban Dau la:");
+					System.out.println(t.getHanSuDung());
+					System.out.println("Moi ban nhap Han Su Dung moi:");
+					temp = new Scanner(System.in).nextLine();
+					Date time = null;
+					try {
+						time = (Date)df.parse(temp);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					t.setHanSuDung(time);
+					System.out.println("Da Thay Doi Han Su Dung");
+					break;
+				}
+				case 4: {
+					System.out.println("So Luong Ban Dau la:");
+					System.out.println(t.getSoLuong());
+					System.out.println("Moi ban nhap So Luong moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setSoLuong(Integer.parseInt(temp));
+					System.out.println("Da Thay Doi So Luong");
+					break;
+				}
+				case 5: {
+					System.out.println("Ghi Chu Ban Dau la:");
+					System.out.println(t.getGhiChu());
+					System.out.println("Moi ban nhap Ghi Chu moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setTenNguyenLieu(temp);
+					System.out.println("Da Thay Doi Ghi Chu");
+					break;
+				}
+				case 6: {
+					System.out.println("Noi Nhap Ban Dau la:");
+					System.out.println(t.getGhiChu());
+					System.out.println("Moi ban nhap Noi Nhap moi:");
+					temp = new Scanner(System.in).nextLine();
+					t.setTenNguyenLieu(temp);
+					System.out.println("Da Thay Doi Noi Nhap");
+					break;
+				}
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + i);
+				}
+			}
+		}
 		
+		}
 	}
 	@Override
 	public void timKiem() {
-		// TODO Auto-generated method stub
-		
+		Arrays.sort(dsTraiCay, (a, b) -> a.getTenNguyenLieu().compareTo(b.getTenNguyenLieu()));
+		System.out.println("Moi ban nhap tu can tim");
+		String key = new Scanner(System.in).nextLine();
+		for(TraiCay t:dsTraiCay) {
+			if(t.getTenNguyenLieu().toLowerCase().contains(key))
+				System.out.println(t.getTenNguyenLieu());
+		}
 	}
 	@Override
 	public void docFile() {
@@ -165,13 +282,21 @@ public class TraiCay extends NguyenLieu {
 	}
 	@Override
 	public void xuatDs() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Danh Sach cua Nguyen Lieu Trai Cay la: ");
+		System.out.printf("|%-2s | %-20s | %-6s | %-7s | %-2s | %-20s|%-10s","ID", "Ten Nguyen Lieu","Gia","Han Su Dung","So Luong", "Ghi Chu","Noi Nhap");
+		for(TraiCay t:dsTraiCay) {
+			System.out.println(t.toString());
+		}
+			
 	}
 	@Override
 	public void themNSp() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Moi ban nhap so luong nguyen lieu Thit ma ban muon them");
+		int n = new Scanner(System.in).nextInt();
+		for(int i=0;i<n;i++) {
+			System.out.println("Moi ban nhap nguyen lieu thu "+(i+1));
+			them();
+		}
 	}
 	@Override
 	public boolean ktTrung(int id) {
@@ -183,24 +308,66 @@ public class TraiCay extends NguyenLieu {
 	}
 	@Override
 	public void sapXep() {
-		// TODO Auto-generated method stub
+		TraiCay temp = new TraiCay();
+		System.out.println("Moi ban nhap thu can sap xep");
+		System.out.println("1. id");
+		System.out.println("2. Ten Nguyen Lieu");
+		System.out.println("3. gia");
+		System.out.println("4. Ngay Het Han");
+		int i = new Scanner(System.in).nextInt();
+		switch (i) {
+		case 1: {
+			sapXepTheoId();
+			break;
+		}
+		case 2:{
+			sapXepTheoTen();
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + i);
+		}
+		
+		ghiFile();
 		
 	}
 	@Override
 	public void sapXepTheoTen() {
-		// TODO Auto-generated method stub
+		Arrays.sort(dsTraiCay, (a, b) -> a.getTenNguyenLieu().compareTo(b.getTenNguyenLieu()));
 		
 	}
 	@Override
 	public void sapXepTheoGia() {
-		// TODO Auto-generated method stub
+		TraiCay t = new TraiCay();
+		for(int j=0;j<dsTraiCay.length;j++) {
+			for(int h=j+1;h<dsTraiCay.length;h++) {
+				if(dsTraiCay[j].getGia()>dsTraiCay[h].getGia()) {
+					t= dsTraiCay[j];
+					dsTraiCay[j] = dsTraiCay[h];
+					dsTraiCay[h] = t;
+				}	
+			}
+		}
 		
 	}
 	@Override
 	public void sapXepTheoId() {
-		// TODO Auto-generated method stub
+		TraiCay t = new TraiCay();
+		for(int j=0;j<dsTraiCay.length;j++) {
+			for(int h=j+1;h<dsTraiCay.length;h++) {
+				if(dsTraiCay[j].getId()>dsTraiCay[h].getId()) {
+					t= dsTraiCay[j];
+					dsTraiCay[j] = dsTraiCay[h];
+					dsTraiCay[h] = t;
+				}	
+			}
+		}
 		
 	}
 	
-	
+	@Override
+	public String toString() {
+		
+		return super.toString() + String.format("| %-20s| %-10s", ghiChu,noiNhap);
+	}
 }

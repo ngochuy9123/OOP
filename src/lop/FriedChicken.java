@@ -83,7 +83,11 @@ public class FriedChicken extends Food {
 
 	@Override
 	public void xuatDs() {
-		// TODO Auto-generated method stub
+		System.out.println("Danh Sach cua Mon An Thit la: ");
+		System.out.printf("|%-2s | %-20s | %-6s | %-7s | %-7s","ID", "Ten Mon An","Gia","SLg Ga","Loai Ga");
+		System.out.println();
+		for(FriedChicken ga:dsGaChien)
+			System.out.println(ga.toString());
 		
 	}
 
@@ -91,9 +95,16 @@ public class FriedChicken extends Food {
 	public void them() {
 		System.out.println("Moi ban nhap id San Pham");
 		int id = new Scanner(System.in).nextInt();
-		if(ktTrung(id)==true) {
-			System.out.println("Id nay da ton tai");
-			them();
+		int test = 1;
+		while(test==1) {
+			System.out.println("Moi ban nhap id San Pham");
+			id = new Scanner(System.in).nextInt();
+			if(ktTrung(id)==true) {
+				System.out.println("Id nay da ton tai");
+			}
+			else {
+				test = 0;
+			}
 		}
 		System.out.println("Moi ban nhap ten San Pham");
 		String tenSp = new Scanner(System.in).nextLine();
@@ -107,7 +118,7 @@ public class FriedChicken extends Food {
 		dsGaChien = Arrays.copyOf(dsGaChien, dsGaChien.length+1);
 		dsGaChien[dsGaChien.length-1] = new FriedChicken(id, tenSp, gia,slg, idNlG);
 		
-		try {
+		try {	
 			ghiFile();
 		} catch (IOException e) {
 			System.out.println("loi ghi file");
@@ -130,20 +141,138 @@ public class FriedChicken extends Food {
 
 	@Override
 	public void xoa() {
-		// TODO Auto-generated method stub
+		System.out.println("Moi ban nhap id ma ban can xoa");
+		int id = new Scanner(System.in).nextInt();
+		FriedChicken[] dst = new FriedChicken[0];
+		for(FriedChicken h:dsGaChien) {
+			if(h.getId() != id) {
+				dst = Arrays.copyOf(dst, dst.length+1);
+				dst[dst.length-1] = new FriedChicken(h.getId(), h.getTenMonAn(), h.getGia(), h.getSlgGa(),h.getIdLoaiGa());
+			}
+			
+		}
+		dsGaChien = Arrays.copyOf(dst, dst.length);
+		try {
+			ghiFile();
+		} catch (IOException e) {
+			System.out.println("Loi ghi file");
+			e.printStackTrace();
+		}
+		
+		System.out.println("Ban co muon xoa tiep khong ----- Nhan 'y' de xoa tiep");
+		String c = new Scanner(System.in).nextLine();
+		if(c.equals("y"))
+			xoa();
 		
 	}
 
 	@Override
 	public void sua() {
-		// TODO Auto-generated method stub
+		System.out.println("Moi ban nhap id Mon An ma ban muon sua");
+		int id = new Scanner(System.in).nextInt();
+		String temp = null;	
+		if(ktTrung(id)==false) {
+			System.out.println("Khong Ton tai id Thuc An nay;");
+		}
+		else {
+			for(FriedChicken ham:dsGaChien) {
+				if(ham.getId()==id) {
+					System.out.println("Ban muon sua cai gi");
+					System.out.println("1. Ten Mon An");
+					System.out.println("2. Gia");
+					System.out.println("3. So Luong Ga");
+					System.out.println("4. Id Nguyen Lieu");
+					int lc = new Scanner(System.in).nextInt();
+					switch (lc) {
+					case 1: {
+						System.out.println("Ten Mon An Ban Dau la:");
+						System.out.println(ham.getTenMonAn());
+						System.out.println("Moi ban nhap Ten Mon An moi:");
+						temp = new Scanner(System.in).nextLine();
+						ham.setTenMonAn(temp);
+						System.out.println("Da Thay Doi Ten Nguyen Lieu");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+						}
+					case 2: {
+						System.out.println("Gia Ban Dau la:");
+						System.out.println(ham.getGia());
+						System.out.println("Moi ban nhap Gia moi:");
+						double tam = new Scanner(System.in).nextDouble();
+						ham.setGia(tam);
+						System.out.println("Da Thay Doi Thanh Cong");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					case 3:{
+						System.out.println("So Luong Ga Ban Dau la:");
+						System.out.println(ham.getSlgGa());
+						System.out.println("Moi ban nhap Gia moi:");
+						int tam = new Scanner(System.in).nextInt();
+						ham.setSlgGa(tam);
+						System.out.println("Da Thay Doi Thanh Cong");
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					case 4:{
+						System.out.println("Nguyen Lieu Ban Dau la: ");
+						int idt =0;
+						for(Thit t: Thit.dsThit) {
+							if(t.getId() == ham.getIdLoaiGa()) {
+								System.out.println(t.getId()+" - "+t.getTenNguyenLieu());
+								System.out.println("Moi ban nhap id Nguyen Lieu Moi: ");
+								while(true) {
+									idt = new Scanner(System.in).nextInt();
+									if(t.ktTrung(idt)==true) {
+										System.out.println("Da Cap Nhat Thanh Cong");
+										break;
+									}
+									else {
+										System.out.println("Id nguyen lieu khong ton tai;");
+									}
+								}
+							}
+						}
+						ham.setIdLoaiGa(idt);
+						try {
+							ham.ghiFile();
+						} catch (IOException e) {
+							System.out.println("Loi ghi file cap nhat");
+							e.printStackTrace();
+						}
+						break;
+					}
+					
+					}
+				}
+			}
+		}
 		
 	}
 
 	@Override
 	public void timKiem() {
-		// TODO Auto-generated method stub
-		
+		Arrays.sort(dsGaChien, (a, b) -> a.getTenMonAn().compareTo(b.getTenMonAn()));
+		System.out.println("Moi ban nhap tu can tim");
+		String key = new Scanner(System.in).nextLine();
+		for(FriedChicken h:dsGaChien)
+			if(h.getTenMonAn().toLowerCase().contains(key))
+				System.out.println( h.toString());
 	}
 
 	@Override
@@ -170,6 +299,7 @@ public class FriedChicken extends Food {
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + n);
 		}
+		xuatDs();
 		
 	}
 
@@ -239,7 +369,7 @@ public class FriedChicken extends Food {
 		OutputStreamWriter osw = new OutputStreamWriter(fos);
 		BufferedWriter bw = new BufferedWriter(osw);
 		for(FriedChicken t:dsGaChien) {
-			String line = t.getId()+";"+t.getTenMonAn()+";"+t.getGia()+";"+";"+t.getSlgGa()+t.getIdLoaiGa();
+			String line = t.getId()+";"+t.getTenMonAn()+";"+t.getGia()+";"+t.getSlgGa()+";"+t.getIdLoaiGa();
 			bw.write(line);
 			bw.newLine();	
 		}
@@ -248,6 +378,13 @@ public class FriedChicken extends Food {
 		osw.close();
 		System.out.println("Ghi thanh Cong");
 		
+	}
+	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString() + String.format("| %-2s|%-2s|", slgGa,idLoaiGa) ;
 	}
 	
 }
