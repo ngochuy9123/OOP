@@ -50,6 +50,6 @@ public class NuocCoGa extends Food {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString() + String.format("|%-10s |%-6s |", hangNuoc,giaNhapHang);
+		return super.toString() + String.format("|%-20s |%-20s |", hangNuoc,giaNhapHang);
 	}
 }

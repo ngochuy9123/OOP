@@ -110,11 +110,6 @@ public class NguyenLieuList implements InterFile,InterDanhSach {
 		System.out.println("Ghi thanh Cong");
 	}
 
-	@Override
-	public boolean ktTrung(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public void xuatDs() {
@@ -184,11 +179,6 @@ public class NguyenLieuList implements InterFile,InterDanhSach {
 		}
 	}
 
-	@Override
-	public void themNSp() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void xoa() {
@@ -276,8 +266,7 @@ public class NguyenLieuList implements InterFile,InterDanhSach {
 	public void sapXep() {
 		System.out.println("Moi ban chon thu can sap xep ");
 		System.out.println("1. id Nguyen Lieu");
-		System.out.println("2. Ten Mon An");
-		System.out.println("3. Gia Mon An");
+		System.out.println("2. Gia Mon An");
 		int n = new Scanner(System.in).nextInt();
 		
 		switch (n) {
@@ -285,11 +274,8 @@ public class NguyenLieuList implements InterFile,InterDanhSach {
 			sapXepTheoId();
 			break;
 		}
+		
 		case 2: {
-			sapXepTheoTen();
-			break;
-		}
-		case 3: {
 			sapXepTheoGia();
 			break;
 		}
@@ -299,10 +285,7 @@ public class NguyenLieuList implements InterFile,InterDanhSach {
 		xuatDs();
 	}
 
-	@Override
-	public void sapXepTheoTen() {
-		System.out.println("Dang cap nhat");
-	}
+	
 
 	@Override
 	public void sapXepTheoGia() {

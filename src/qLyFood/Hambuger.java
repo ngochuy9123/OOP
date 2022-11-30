@@ -60,7 +60,7 @@ public class Hambuger extends Food {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString() + String.format("|%-3s |", idNguyenLieuThit);
+		return super.toString() + String.format("|%-20s |", idNguyenLieuThit);
 	}
 	
 }

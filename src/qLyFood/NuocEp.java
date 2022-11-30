@@ -59,6 +59,6 @@ public class NuocEp extends Food {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString() + String.format("|%-3s |", idTraiCay);
+		return super.toString() + String.format("|%-20s |", idTraiCay);
 	}
 }

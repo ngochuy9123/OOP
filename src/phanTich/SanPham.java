@@ -9,7 +9,7 @@ import java.util.Arrays;
 import lop.InterFile;
 
 public class SanPham implements InterFile {
-	private int loaiSanPham;
+	private String loaiSanPham;
 	private int idSanPham;
 	private int soLieu;
 	String file_Doanh_Thu = "./src/file/DoanhThu";
@@ -18,16 +18,16 @@ public class SanPham implements InterFile {
 	public SanPham() {
 		super();
 	}
-	public SanPham(int loaiSanPham, int idSanPham, int soLieu) {
+	public SanPham(String loaiSanPham, int idSanPham, int soLieu) {
 		super();
 		this.loaiSanPham = loaiSanPham;
 		this.idSanPham = idSanPham;
 		this.soLieu = soLieu;
 	}
-	public int getLoaiSanPham() {
+	public String getLoaiSanPham() {
 		return loaiSanPham;
 	}
-	public void setLoaiSanPham(int loaiSanPham) {
+	public void setLoaiSanPham(String loaiSanPham) {
 		this.loaiSanPham = loaiSanPham;
 	}
 	public int getIdSanPham() {
@@ -55,7 +55,7 @@ public class SanPham implements InterFile {
 			
 			if(arr.length==4) {
 				dssp = Arrays.copyOf(dssp, dssp.length+1);
-				dssp[dssp.length-1] = new SanPham(Integer.parseInt(arr[0]) ,Integer.parseInt(arr[2])  , Integer.parseInt(arr[3]) );
+				dssp[dssp.length-1] = new SanPham(arr[0] ,Integer.parseInt(arr[2])  , Integer.parseInt(arr[3]) );
 			}
 			
 			line = br.readLine();

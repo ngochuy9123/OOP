@@ -71,7 +71,7 @@ public class GaChien extends Food {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString()+String.format("|%-3s | %-3s |", slgGa,idLoaiGa);
+		return super.toString()+String.format("|%-20s | %-20s |", slgGa,idLoaiGa);
 	}
 	
 }
